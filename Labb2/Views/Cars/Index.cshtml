@@ -1,0 +1,129 @@
+﻿@model IEnumerable<Labb2.Models.Car>
+
+@{
+    ViewData["Title"] = "Машини";
+}
+
+@if (ViewBag.ProducerID == 0)
+{
+    <h1>Машини</h1>
+}
+else
+{
+    <h1>Машини @ViewBag.Producer</h1>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Producer)
+            </th>
+            @if (ViewBag.ProducerId == 0)
+            {
+                <th>
+                    @Html.DisplayNameFor(model => model.ProducerId)
+                </th>
+            }
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+            var targetId = "#modal" + item.Id;
+            var modalId = "modal" + item.Id;
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Producer.Id)
+            </td>
+                @if (ViewBag.ProducerId == 0)
+                {
+                    <th>
+                        @Html.DisplayFor(model => item.Producer.Name)
+                    </th>
+                }
+            
+                <td>
+                    <form method="get" asp-controller="Purchases" asp-action="Purchase">
+                        <input type="hidden" name="carId" value="@item.Id" />
+                        <input type="hidden" name="prId" value="@ViewBag.ProducerId" />
+                        <p>
+                            <input type="submit" class="btn btn-success" value="Придбати" style="width:100px" />
+                        </p>
+                    </form>
+                    <form method="get" asp-action="Edit" asp-route-id="@item.Id">
+                        <p>
+                            <input type="hidden" name="prId" value="@ViewBag.ProducerId" />
+                            <input type="submit" class="btn btn-warning" value="Редагувати" style="width:100px" />
+                        </p>
+                    </form>
+                    <form method="get" asp-action="Delete" asp-route-id="@item.Id">
+                        <input type="submit" class="btn btn-danger mr-2" value="Видалити" />
+                    </form>
+
+                  
+                </td>
+            
+        </tr>
+}
+    </tbody>
+</table>
+
+<table>
+    <tr>
+        <td>
+            <form method="get" asp-action="Create">
+                <input type="hidden" name="prId" value="@ViewBag.ProducerId" />
+                <input type="submit" class="btn btn-success" value="Додати нову" />
+            </form>
+        </td>
+        @if (ViewBag.ProducerId != 0)
+        {
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+                <form method="get" asp-controller="Producers" asp-action="Index">
+                    <input type="submit" class="btn btn-primary" value="Назад до списку виробників" />
+                </form>
+            </td>
+        }
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>
+            <form method="get" asp-controller="Home" asp-action="Index">
+                <input type="submit" class="btn btn-primary" value="На головну" />
+            </form>
+        </td>
+    </tr>
+</table>
+
+
+@section scripts
+    {
+    <script>
+        window.addEventListener("load", function () {
+            if ('@ViewBag.Purchased' == 1) {
+                $("#warning").modal();
+            }
+        });
+    </script>
+}

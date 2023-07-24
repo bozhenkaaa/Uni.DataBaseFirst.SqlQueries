@@ -1,0 +1,45 @@
+﻿@model Customer
+
+@{
+    ViewData["Title"] = "Покупка";
+}
+
+<h1>Покупка @ViewBag.Car</h1>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" asp-action="Purchase">
+            <input type="hidden" name="carId" value="@ViewBag.CarId" />
+            <input type="hidden" name="prId" value="@ViewBag.ProducerId" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Surname" class="control-label"></label>
+                <input asp-for="Surname" class="form-control" />
+                <span asp-validation-for="Surname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Email</label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            
+            <table>
+                <tr>
+                    <td>
+                        <input type="submit" value="Купити" class="btn btn-success" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+
+<form method="get" asp-controller="Cars" asp-action="Index">
+    <input type="submit" class="btn btn-primary" value="Назад до списку машин" />
+</form>

@@ -1,0 +1,44 @@
+﻿@{
+    ViewData["Title"] = "Головна";
+}
+
+<div class="text-center">
+    <h1 class="display-4">RoyalCars.</h1>
+    <p>Продаж елітних машин.</p>
+</div>
+
+<form method="get" asp-controller="Producers" asp-action="Index">
+    <p align="center">
+        <input type="submit" class="btn btn-primary btn-lg" style="width:200px" value="Виробники" />
+    </p>
+</form>
+
+<form method="get" asp-controller="Cars" asp-action="Index" asp-route-id="0">
+    <p align="center">
+        <input type="submit" class="btn btn-primary btn-lg" style="width:200px" value="Машини" />
+    </p>
+</form>
+
+<form method="get" asp-controller="Customers" asp-action="Index">
+    <p align="center">
+        <input type="submit" class="btn btn-primary btn-lg" style="width:200px" value="Покупці" />
+    </p>
+</form>
+
+<form method="get" asp-controller="Purchases" asp-action="Index" asp-route-id="0">
+    <p align="center">
+        <input type="submit" class="btn btn-primary btn-lg" style="width:200px" value="Покупки" />
+    </p>
+</form>
+
+<form method="get" asp-controller="Queries" asp-action="Index">
+    <p align="center">
+        <input type="submit" class="btn btn-primary btn-lg" style="width:200px" value="Запити" />
+    </p>
+</form>
+
+<form method="get" asp-controller="Dovidka" asp-action="Index">
+    <p align="center">
+        <input type="submit" class="btn btn-primary btn-lg" style="width:200px" value="Довідка" />
+    </p>
+</form>

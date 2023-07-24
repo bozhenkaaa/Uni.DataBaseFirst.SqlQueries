@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Labb2.Models.Producer>
+
+@{
+    ViewData["Title"] = "Виробники";
+}
+
+<h1>Виробники</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Country)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+            var targetId = "#modal" + item.Id;
+            var modalId = "modal" + item.Id;
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Country.Name)
+            </td>
+            <td>
+                <div class="btn-toolbar">
+                    <form method="get" asp-controller="Cars" asp-action="Index" asp-route-id="@item.Id">
+                        <input type="submit" class="btn btn-primary mr-2" value="Список машин" />
+                    </form>
+                    <form method="get" asp-action="Edit" asp-route-id="@item.Id">
+                        <input type="submit" class="btn btn-warning mr-2" value="Редагувати" />
+                    </form>
+                    <form method="get" asp-action="Delete" asp-route-id="@item.Id">
+                        <input type="submit" class="btn btn-danger mr-2" value="Видалити" />
+                    </form>
+
+               
+                </div>
+                </td>
+        </tr>
+}
+    </tbody>
+</table>
+<table>
+    <tr>
+        <td>
+            <form method="get" asp-action="Create">
+                <input type="submit" class="btn btn-success" value="Додати нового" />
+            </form>
+        </td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>
+            <form method="get" asp-controller="Home" asp-action="Index">
+                <input type="submit" class="btn btn-primary" value="На головну" />
+            </form>
+        </td>
+    </tr>
+</table>
